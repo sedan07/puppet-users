@@ -1,4 +1,14 @@
 define users::setup($hash) {
+
+  if($hash[$name]['group']) {
+    $_group = $hash[$name]['group']
+    if(!defined(Group[$name])) {
+      group { $name:
+        gid => $_group,
+      }
+    }
+  }
+
   if(!defined(User[$name])) {
     user { $name :
       ensure               => $hash[$name]['ensure'],
