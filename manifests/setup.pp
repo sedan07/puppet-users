@@ -1,10 +1,11 @@
 define users::setup($hash) {
 
-  if($hash[$name]['group']) {
-    $_group = $hash[$name]['group']
+  if($hash[$name]['gid']) {
+    $_group = $hash[$name]['gid']
     if(!defined(Group[$name])) {
       group { $name:
         gid => $_group,
+        before => User[$name],
       }
     }
   }
